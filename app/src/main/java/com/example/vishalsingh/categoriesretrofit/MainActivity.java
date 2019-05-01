@@ -33,6 +33,7 @@ import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity {
     private CustomAdapter adapter;
+
     private RecyclerView recyclerView;
     private ProgressBar progressBar;
     private TextView network;

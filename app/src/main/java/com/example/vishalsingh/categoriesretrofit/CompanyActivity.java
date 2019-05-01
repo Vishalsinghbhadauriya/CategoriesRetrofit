@@ -8,18 +8,15 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.telecom.Call;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.vishalsingh.categoriesretrofit.model.Category;
 import com.example.vishalsingh.categoriesretrofit.model.Company;
-import com.example.vishalsingh.categoriesretrofit.model.ExampleTwo;
+import com.example.vishalsingh.categoriesretrofit.model.Example;
 import com.example.vishalsingh.categoriesretrofit.network.GetDataService;
-import com.example.vishalsingh.categoriesretrofit.network.GetDataServiceTwo;
 import com.example.vishalsingh.categoriesretrofit.network.RetrofitClientInstance;
 
 import java.util.List;
@@ -86,11 +83,11 @@ public class CompanyActivity extends AppCompatActivity {
             Intent intent = getIntent();
             id = getIntent().getStringExtra("id");
         }
-        GetDataServiceTwo serviceTwo = RetrofitClientInstance.getRetrofitInstance().create(GetDataServiceTwo.class);
-        retrofit2.Call<ExampleTwo> call = serviceTwo.getCompanies(id);
-        call.enqueue(new Callback<ExampleTwo>() {
+        GetDataService serviceTwo = RetrofitClientInstance.getRetrofitInstance().create(GetDataService.class);
+        retrofit2.Call<Example> call = serviceTwo.getCompanies(id);
+        call.enqueue(new Callback<Example>() {
             @Override
-            public void onResponse(retrofit2.Call<ExampleTwo> call, Response<ExampleTwo> response) {
+            public void onResponse(retrofit2.Call<Example> call, Response<Example> response) {
                 List<Company> companyList = response.body().getCompanies();
                 progressBar.setVisibility(View.GONE);
                 generateDataListTwo(companyList);
@@ -98,7 +95,7 @@ public class CompanyActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onFailure(retrofit2.Call<ExampleTwo> call, Throwable t) {
+            public void onFailure(retrofit2.Call<Example> call, Throwable t) {
                 progressBar.setVisibility(View.GONE);
                 network.setVisibility(View.VISIBLE);
                 tryagain.setVisibility(View.VISIBLE);
